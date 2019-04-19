@@ -40,4 +40,14 @@ axios
   })
 };
 
-// export const addSmurf = (
+export const addSmurf = newSmurf => dispatch => {
+  dispatch({type: ADD_SMURF_SUCCESS});
+  axios
+  .post("http://localhost:3333/smurfs", newSmurf)
+  .then(response => {
+    dispatch({type: ADD_SMURF_SUCCESS, payload: response.data});
+  })
+  .catch(err => {
+    dispatch({type: ADD_SMURF_FAIL, payload: err});
+  });
+}
